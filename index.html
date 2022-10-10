@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta charset="utf-8">
+    <style>
+        body {
+            background-color: rgb(255, 254, 240);
+            color: black;
+        }
+
+        #bigBox {
+            height: 2000px; /* スクロールバーを表示させ、スワイプでアドレスバーが隠せるように */
+
+        }
+
+        #sizeOutBox {
+            margin: 50px auto 10px auto;
+            text-align: center;
+        }
+
+        button {
+            display: block;
+            margin: auto;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: solid 2px gray;
+        }
+
+        table td, table th {
+            padding: 0.5em;
+            border: solid 1px gray;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        #comment {
+            text-align: left;
+            font-size: 13px;
+            color:brown;
+        }
+    </style>
+</head>
+<body>
+    <div id="bigBox">
+        <div id="sizeOutBox">
+            ここにサイズの表が表示される。
+        </div>
+        <button onclick="sizeOut()">サイズ表示</button>
+        <p id='comment'>
+            スワイプしてブラウザのアドレスバーが隠れてから再度「サイズ表示」ボタンを
+            押すと数値が変わるのを確認できる。ブラウザによって状況が異なるので注意。
+        </p>
+    </div>
+
+    <script>
+        window.onload = sizeOut;
+
+        function sizeOut() {
+            with(window) {
+                var tableStr0 = 
+                `<table>
+                    <tr><th>属性</th><th>値</th><th>属性</th><th>値</th></tr>
+                    <tr><td>innerWidth</td><td>${innerWidth}</td><td>innerHeight</td><td>${innerHeight}</td></tr>
+                    <tr><td>outerWidth</td><td>${outerWidth}</td><td>outerHeight</td><td>${outerHeight}</td></tr>`;
+            }
+            with(document) {
+                var tableStr1 = 
+                    `<tr><td>clientWidth</td><td>${documentElement.clientWidth}</td>
+                    <td>clientHeight</td><td>${documentElement.clientHeight}</td></tr>
+                    <tr><td>body.innerWidth</td><td>${body.clientWidth}</td>
+                    <td>body.innerHeight</td><td>${body.clientHeight}</td></tr>
+                </table>`;
+            }
+            document.getElementById("sizeOutBox").innerHTML = tableStr0 + tableStr1;
+        }
+    </script>
+</body>
+</html>
